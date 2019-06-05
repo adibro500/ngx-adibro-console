@@ -134,6 +134,41 @@
           }
         }
       }
+    },
+    "ngx-adibro-console": {
+      "root": "projects/ngx-adibro-console",
+      "sourceRoot": "projects/ngx-adibro-console/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-adibro-console/tsconfig.lib.json",
+            "project": "projects/ngx-adibro-console/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-adibro-console/src/test.ts",
+            "tsConfig": "projects/ngx-adibro-console/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-adibro-console/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-adibro-console/tsconfig.lib.json",
+              "projects/ngx-adibro-console/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-adibro-terminal"
