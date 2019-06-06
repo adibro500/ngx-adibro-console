@@ -1,24 +1,58 @@
-# NgxAdibroConsole
+# ngx-adibro-datetime-picker for Angular 7+
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+This is an angular component for emulating terminal/console.
 
-## Code scaffolding
+## Installation
+```
+npm install --save ngx-adibro-console
+```
 
-Run `ng generate component component-name --project ngx-adibro-console` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-adibro-console`.
-> Note: Don't forget to add `--project ngx-adibro-console` or else it will be added to the default project in your `angular.json` file. 
+# For demos please visit 
 
-## Build
+[demos](https://ngx-adibro-terminal-nibrutdlwm.now.sh/)
 
-Run `ng build ngx-adibro-console` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Publishing
+## Usage
 
-After building your library with `ng build ngx-adibro-console`, go to the dist folder `cd dist/ngx-adibro-console` and run `npm publish`.
 
-## Running unit tests
+### Inside app.module file import the component and service:
 
-Run `ng test ngx-adibro-console` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+import { NgxAdibroConsoleModule, NgxAdibroConsoleService } from 'ngx-adibro-console';
 
-## Further help
+@NgModule({
+  declarations: [
+    ...
+  ],
+  imports: [
+    ... ,
+        NgxAdibroConsoleModule,
+    ... ,
+  ],
+  providers: [
+      NgxAdibroConsoleService
+  ],
+  bootstrap: [...]
+})
+export class AppModule { }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+### In your HTML file you can do:
+
+```
+<ngx-adibro-console [width]="50" [height]="50" [welcomeMessage]="'Hello .....'" [promptMessage]="'Godamn $'" [clearAll]="true" [cacheCommands]="true"></ngx-adibro-console>
+```
+### You can then usre it in your component file like so:
+
+```
+export class AppComponent {
+constructor(public ngxAdibroConsoleService: NgxAdibroConsoleService) {
+    this.ngxAdibroConsoleService.commandHandler.subscribe(command => {
+      let result = (command.toLowerCase() === 'Date'.toLowerCase()) ? new Date().toString() : command;
+      this.ngxAdibroConsoleService.sendResponse(result);
+    })
+
+  }
+}
+```
+Have fun !!!
