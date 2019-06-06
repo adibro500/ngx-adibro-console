@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'ngx-adibro-console',
   template: `
-  <div [ngClass]="'ui-welcome-msg ui-height ui-width'" (click)="focus(in)">
+  <div [ngClass]="'ui-welcome-msg'" [style.width.%]="width" [style.height.vh]="height" (click)="focus(in)">
           <div>
                 {{welcomeMessage}}
           </div>
@@ -25,19 +25,35 @@ import { Subscription } from 'rxjs';
       border: transparent;
       font-family:monospace;
       outline: none;
-      width:90%;
-    }
-    .ui-height {
-      min-height: 400px;
-    }
-    .ui-width {
-      min-width: 400px;
-    }
+      width: 80%;
+      }
+   
     .ui-welcome-msg {
       background-color:black;
       font-family:monospace;
       color:white;
-    }`
+      overflow: scroll;
+    }
+    /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+    `
   ]
 })
 export class NgxAdibroConsoleComponent implements OnInit {
@@ -45,6 +61,9 @@ export class NgxAdibroConsoleComponent implements OnInit {
   @Input() clearAll: boolean;
   @Input() promptMessage: string;
   @Input() cacheCommands: boolean;
+  @Input() width: number;
+  @Input() height: number;
+
   command: any;
   commands: any[] = [];
   commandDups: any[] = []
@@ -71,7 +90,7 @@ export class NgxAdibroConsoleComponent implements OnInit {
     }
     if (event.keyCode == 13) {
       this.commands.push({ text: this.command });
-      if (this.cacheCommands) {
+      if (this.cacheCommands && this.command) {
         this.commandDups.push({ text: this.command });
         ++this.toggleUp;
       }

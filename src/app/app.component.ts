@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxAdibroConsoleService } from 'projects/ngx-adibro-console/src/public-api';
+import { NgxAdibroConsoleService } from 'ngx-adibro-console';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'ngx-adibro-terminal';
   constructor(public ngxAdibroConsoleService: NgxAdibroConsoleService) {
     this.ngxAdibroConsoleService.commandHandler.subscribe(command => {
-      let result = (command.toLowerCase() === 'Date'.toLowerCase()) ? new Date() : command;
+      let result = (command.toLowerCase() === 'Date'.toLowerCase()) ? new Date().toString() : command;
       this.ngxAdibroConsoleService.sendResponse(result);
     })
 

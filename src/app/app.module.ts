@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgxAdibroConsoleModule } from 'projects/ngx-adibro-console/src/lib/ngx-adibro-console.module';
+import { NgxAdibroConsoleModule } from 'ngx-adibro-console';
+import { NgxAdibroConsoleService } from 'ngx-adibro-console';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { NgxAdibroConsoleModule } from 'projects/ngx-adibro-console/src/lib/ngx-
     NgxAdibroConsoleModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    NgxAdibroConsoleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
